@@ -30,6 +30,7 @@ def _cli_parse(args):
     # opt("-c","--create",action="store_true",help="find folder or file by create time")
     # opt("-m","--modify",action="store_true",help="find folder or file by modify time")
     args = parser.parse_args()
+    print(type(args))
     return args
 
 # BFS

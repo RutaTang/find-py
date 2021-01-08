@@ -25,10 +25,6 @@ def _cli_parse(args):
     opt("-r","--regex",action="store_true",help="whether support regex")
     opt("-t","--type",default="all",choices=['folder', 'file','all'],help="find folder or file: all")
     opt("-s","--size",default="all", help= "size(Bytes) of file (only for file): lt,gt,le,ge,eq,ne [num]; ne200")
-    # today = datetime.date.today()
-    # opt("-d","--durations",default="={}".format(today.isoformat()),choices=['<date','>date','=date','<=date','>=date','!=date'],help="durations of file cretae or modify: =2020-10-1")
-    # opt("-c","--create",action="store_true",help="find folder or file by create time")
-    # opt("-m","--modify",action="store_true",help="find folder or file by modify time")
     args = parser.parse_args()
     print(type(args))
     return args

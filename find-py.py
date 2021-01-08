@@ -32,7 +32,9 @@ def _cli_parse(args):
     args = parser.parse_args()
     return args
 
-
+# BFS
+#iter all file and folders
+#if all filters return true, then this file or folder is target
 def ffFind(args,filters):
     """
     docstring
@@ -56,8 +58,8 @@ def ffFind(args,filters):
             full_ffname = os.path.join(current_path,ffname)
             if os.path.isdir(full_ffname):
                 folder_queue.append(full_ffname)
+
             #all filters apply to filter targets
-        
             for i,mfilter in enumerate(filters):
                 result = mfilter(args=args,ffname = ffname,full_ffname = full_ffname)
                 if not result:
@@ -71,7 +73,6 @@ def display(target_sequence):
     for fpath in target_sequence:
         print(fpath)
 
-    
 
 
 if __name__ == "__main__":
@@ -84,7 +85,7 @@ if __name__ == "__main__":
     import filters
     allfilters = [eval("filters.{}".format(el)) for el in filters.__all__]
 
-    #user filters
+    #user filters: -f must have value
     if args.fpath:
         #import user filters from json
         with open(args.fpath,"r") as f:
@@ -94,6 +95,8 @@ if __name__ == "__main__":
                 json_text+= line
         json_dict = json.loads(json_text)
         user_filters = json_dict["user_filters"]
+
+        #load modle by name and abspath
         for user_filter in user_filters:
             name = user_filter['name']
             fpath = user_filter['path']
